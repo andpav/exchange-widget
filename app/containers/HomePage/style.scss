@@ -1,0 +1,74 @@
+.home-page {
+  color: white;
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  section {
+    margin: 3em auto;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &.content {
+      position: relative;
+      text-align: center;
+      background: linear-gradient(180deg, #1c6dc6, #5EA1E8);
+      max-width: 400px;
+    }
+  }
+
+  form {
+    margin-bottom: 1em;
+
+    input {
+      outline: none;
+      border-bottom: 1px dotted #999;
+    }
+  }
+
+  span.at-prefix {
+    color: black;
+    margin-left: 0.4em;
+  }
+}
+
+.content__menu {
+  border: 1px solid;
+  max-width: 130px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #1A6AC1;
+}
+
+.content__menu-text {
+  position: relative;
+}
+
+.content__menu-text::after {
+  content: '';
+  position: absolute;
+  right: 3px; top: 11px;
+  border: 4px solid transparent;
+  border-top: 4px solid white;
+}
+
+.content__button {
+  position: absolute;
+  top: 4px;
+  right: 1px;
+}
+
+.slider_down {
+  margin-top: 50px;
+}
+
+.slider-content {
+
+}
+
+.toast-progress-bar {
+  display: none;
+}

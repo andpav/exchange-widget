@@ -1,0 +1,129 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Slider from 'react-slick';
+import { ToastContainer, toast } from 'react-toastify';
+import roundAmount from '../../utils/roundAmount';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './style.scss';
+
+export default class HomePage extends Component {
+  componentDidMount() {
+    this.props.loadRates();
+    this.props.loadWallets();
+  }
+
+  render() {
+    const { loading, wallets, walletsError, ratesError, fromWallet, toWallet, currentRate, amount, setAmount, setFromWallet, setToWallet } = this.props;
+
+    if (loading) {
+      return (
+        <article>
+          <div className="home-page">
+            <section className="content">
+              <div className="loader">loading...</div>
+            </section>
+          </div>
+        </article>);
+    }
+
+    if (walletsError || ratesError) {
+      return (
+        <article>
+          <div className="home-page">
+            <section className="content">
+              (<div>error...</div>)
+            </section>
+          </div>
+        </article>
+      );
+    }
+
+    const settingsSliderUp = {
+      dots: true,
+      className: 'slider_up',
+      // dotsClass: 'slider-dots_up',
+      afterChange: (id) => {
+        setFromWallet(wallets.find((wallet) => wallet.id === String(id)));
+      },
+      initialSlide: fromWallet.id,
+    };
+
+    const settingsSliderDown = {
+      dots: true,
+      className: 'slider_down',
+      // dotsClass: 'slider-dots_down',
+      afterChange: (id) => {
+        setToWallet(wallets.find((wallet) => wallet.id === String(id)));
+      },
+      initialSlide: toWallet.id,
+    };
+
+    return (
+      <article>
+        <div className="home-page">
+          <section className="content">
+            <div className="content__menu"><div className="content__menu-text">{`${fromWallet.sign} 1 = ${toWallet.sign} ${currentRate}`}</div></div>
+
+            <button
+              className="content__button"
+              onClick={() => toast(
+                'Success exchange!', {
+                  progressClassName: 'toast-progress-bar'
+                })}
+            >Exchange
+            </button>
+
+            <div className={'slider slider_up'}>
+              <Slider {...settingsSliderUp}>
+                {wallets.map((wallet) => (
+                  <div key={wallet.id} className="slider-content">
+                    <div className="slider-content__row"><span>{wallet.currency}</span> -<input className="slider__input" type="number" min="0" onChange={(event) => setAmount(event.target.value)} value={amount} /></div>
+                    <div className="slider-content__row">You have {`${wallet.sign}${wallet.balance}`}</div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+            <div className={'slider slider_down'}>
+              <Slider {...settingsSliderDown}>
+                {wallets.map((wallet) => (
+                  <div key={wallet.id} className="slider__content">
+                    <div className="slider-content__row"><span>{wallet.currency}</span>  + {roundAmount(amount * currentRate)}</div>
+                    <div className="slider-content__row">
+                      <span>You have {`${wallet.sign}${wallet.balance}`}</span>
+                      <span>{`${toWallet.sign} 1 = ${fromWallet.sign} ${roundAmount(1 / currentRate)}`}</span>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+          </section>
+        </div>
+
+        <ToastContainer />
+      </article>
+    );
+  }
+}
+
+HomePage.propTypes = {
+  fromWallet: PropTypes.object,
+  toWallet: PropTypes.object,
+  wallets: PropTypes.array,
+  amount: PropTypes.string,
+  loading: PropTypes.bool,
+  currentRate: PropTypes.number,
+  walletsError: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
+  ratesError: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
+  loadRates: PropTypes.func,
+  loadWallets: PropTypes.func,
+  setAmount: PropTypes.func,
+};
