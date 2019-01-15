@@ -1,4 +1,4 @@
-import walletReducer, { initialState as walletInitialState} from '../walletReducer';
+import walletReducer, { initialState as walletInitialState } from '../walletReducer';
 import * as walletActions from '../../actions/walletsActions';
 
 describe('walletReducer', () => {
@@ -34,7 +34,7 @@ describe('walletReducer', () => {
   });
 
   it('should set loading fail result correctly', () => {
-    const error = { code: 'code', message: 'message', };
+    const error = { code: 'code', message: 'message' };
 
     const expectedResult =
       state

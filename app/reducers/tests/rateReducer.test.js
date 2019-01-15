@@ -1,4 +1,4 @@
-import rateReducer, { initialState as rateInitialState} from '../rateReducer';
+import rateReducer, { initialState as rateInitialState } from '../rateReducer';
 import * as rateActions from '../../actions/ratesActions';
 
 describe('rateReducer', () => {

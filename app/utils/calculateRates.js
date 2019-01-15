@@ -3,7 +3,7 @@ import roundAmount from './roundAmount';
 export default (ratesData) => {
   const rates = {};
 
-  Object.keys(ratesData).forEach(wallet => Object.assign(rates, {
+  Object.keys(ratesData).forEach((wallet) => Object.assign(rates, {
     [`EUR${wallet}`]: roundAmount(ratesData[wallet]),
     [`${wallet}EUR`]: roundAmount(1 / ratesData[wallet]),
     [`${wallet}${wallet}`]: 1,

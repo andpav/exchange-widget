@@ -4,7 +4,7 @@ import * as walletsSelectors from '../walletsSelectors';
 
 describe('selectWallet', () => {
   it('should select wallets', () => {
-    const data = [{ id: '1' , currency: 'USD', amount: 10 }, { id: '2' , currency: 'EUR', amount: 12.45 }];
+    const data = [{ id: '1', currency: 'USD', amount: 10 }, { id: '2', currency: 'EUR', amount: 12.45 }];
     const walletState =
       initialState
         .set('wallets', data);
@@ -17,7 +17,7 @@ describe('selectWallet', () => {
   });
 
   it('should select fromWallet', () => {
-    const data = { id: '1' , currency: 'USD', amount: 10 };
+    const data = { id: '1', currency: 'USD', amount: 10 };
     const walletState =
       initialState
         .set('fromWallet', data);
@@ -30,7 +30,7 @@ describe('selectWallet', () => {
   });
 
   it('should select toWallet', () => {
-    const data = { id: '2' , currency: 'EUR', amount: 12.45 };
+    const data = { id: '2', currency: 'EUR', amount: 12.45 };
     const walletState =
       initialState
         .set('toWallet', data);
