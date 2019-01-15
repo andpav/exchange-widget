@@ -1,20 +1,20 @@
 import { createSelector } from 'reselect';
 import { selectFromWallet, selectToWallet } from './walletsSelectors';
 
-const selectHome = (state) => state.get('rate');
+const selectRateState = (state) => state.get('rate');
 
 const selectRates = () => createSelector(
-  selectHome,
+  selectRateState,
   (globalState) => globalState.get('rates')
 );
 
 const selectRatesLoading = () => createSelector(
-  selectHome,
+  selectRateState,
   (globalState) => globalState.get('loading')
 );
 
 const selectRatesError = () => createSelector(
-  selectHome,
+  selectRateState,
   (globalState) => globalState.get('error')
 );
 
@@ -32,7 +32,7 @@ const selectCurrentRate = (state) => createSelector(
 
 
 export {
-  selectHome,
+  selectRateState,
   selectRates,
   selectRatesLoading,
   selectRatesError,

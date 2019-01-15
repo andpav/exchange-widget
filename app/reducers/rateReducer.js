@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import * as ratesActions from '../actions/ratesActions';
 
-const initialState = fromJS({
+export const initialState = fromJS({
   loading: true,
   error: false,
   rates: null,

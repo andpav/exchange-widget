@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import * as walletActions from '../actions/walletsActions';
 
-const initialState = fromJS({
+export const initialState = fromJS({
   loading: false,
   error: false,
   wallets: [],

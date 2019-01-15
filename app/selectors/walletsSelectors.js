@@ -1,51 +1,43 @@
 import { createSelector } from 'reselect';
 
-const selectGlobal = (state) => state.get('wallet');
-
-const selectRoute = (state) => state.get('route');
+const selectWalletsState = (state) => state.get('wallet');
 
 const selectWallets = () => createSelector(
-  selectGlobal,
+  selectWalletsState,
   (globalState) => globalState.get('wallets')
 );
 
 const selectFromWallet = () => createSelector(
-  selectGlobal,
+  selectWalletsState,
   (globalState) => globalState.get('fromWallet')
 );
 
 const selectToWallet = () => createSelector(
-  selectGlobal,
+  selectWalletsState,
   (globalState) => globalState.get('toWallet')
 );
 
 const selectAmount = () => createSelector(
-  selectGlobal,
+  selectWalletsState,
   (globalState) => globalState.get('amount')
 );
 
 const selectWalletsLoading = () => createSelector(
-  selectGlobal,
+  selectWalletsState,
   (globalState) => globalState.get('loading')
 );
 
 const selectWalletsError = () => createSelector(
-  selectGlobal,
+  selectWalletsState,
   (globalState) => globalState.get('error')
 );
 
-const selectLocation = () => createSelector(
-  selectRoute,
-  (routeState) => routeState.get('location').toJS()
-);
-
 export {
-  selectGlobal,
+  selectWalletsState,
   selectWallets,
   selectFromWallet,
   selectToWallet,
   selectAmount,
   selectWalletsLoading,
   selectWalletsError,
-  selectLocation,
 };

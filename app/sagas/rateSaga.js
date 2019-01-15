@@ -1,10 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { ratesLoaded, ratesLoadingError, loadRates } from 'actions/ratesActions';
 import calculateRatesData from 'utils/calculateRates';
+import delay from 'utils/delay';
 
 import request from 'utils/request';
-
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export function* getRates() {
   const requestURL = 'https://api.exchangeratesapi.io/latest';
