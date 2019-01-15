@@ -4,8 +4,6 @@ import { selectRatesLoading, selectRatesError, selectCurrentRate } from 'selecto
 import { selectWallets, selectWalletsLoading, selectWalletsError, selectFromWallet, selectToWallet, selectAmount } from 'selectors/walletsSelectors';
 import { loadRates } from 'actions/ratesActions';
 import { loadWallets, setAmount, setFromWallet, setToWallet } from 'actions/walletsActions';
-import reducer from 'reducers/rateReducer';
-import saga from 'sagas/mainSaga';
 import HomePage from './HomePage';
 
 const mapDispatchToProps = (dispatch) => ({

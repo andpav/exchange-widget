@@ -1,9 +1,6 @@
 import { fromJS } from 'immutable';
-
-import {
-  LOAD_RATES_SUCCESS,
-  LOAD_RATES_ERROR,
-} from '../actions/ratesConstants';
+import { handleActions } from 'redux-actions';
+import * as ratesActions from '../actions/ratesActions';
 
 const initialState = fromJS({
   loading: true,
@@ -11,20 +8,14 @@ const initialState = fromJS({
   rates: null,
 });
 
-function rateReducer(state = initialState, action) {
-  switch (action.type) {
-    case LOAD_RATES_SUCCESS:
-      return state
-        .set('rates', action.payload)
-        .set('loading', false)
-        .set('error', false);
-    case LOAD_RATES_ERROR:
-      return state
-        .set('error', action.payload)
-        .set('loading', false);
-    default:
-      return state;
-  }
-}
-
-export default rateReducer;
+export default handleActions({
+  [ratesActions.ratesLoaded]: (state, { payload }) =>
+    state
+      .set('rates', payload)
+      .set('loading', false)
+      .set('error', false),
+  [ratesActions.ratesLoadingError]: (state, { payload }) =>
+    state
+      .set('error', payload)
+      .set('loading', false),
+}, initialState);
