@@ -3,81 +3,94 @@ import { initialState } from '../../reducers/walletReducer';
 import * as walletsSelectors from '../walletsSelectors';
 
 describe('selectWallet', () => {
-  it('should select wallets', () => {
+  it('should select wallets state', () => {
     const data = [{ id: '1', currency: 'USD', amount: 10 }, { id: '2', currency: 'EUR', amount: 12.45 }];
-    const walletState =
-      initialState
-        .set('wallets', data);
 
-    const result = fromJS({
+    const walletState = fromJS({
       wallets: data,
     });
 
-    expect(walletsSelectors.selectWallets(walletState)).toEqual(result);
+    const mockedState = fromJS({
+      wallet: walletState,
+    });
+
+    expect(walletsSelectors.selectWalletsState(mockedState)).toEqual(walletState);
   });
 
+  const selectWallets = walletsSelectors.selectWallets();
+  it('should select wallets', () => {
+    const data = fromJS([{ id: '1', currency: 'USD', amount: 10 }, { id: '2', currency: 'EUR', amount: 12.45 }]);
+
+    const mockedState = fromJS({
+      wallet: {
+        wallets: data,
+      },
+    });
+
+    expect(selectWallets(mockedState)).toEqual(data);
+  });
+
+  const selectFromWallet = walletsSelectors.selectFromWallet();
   it('should select fromWallet', () => {
-    const data = { id: '1', currency: 'USD', amount: 10 };
-    const walletState =
-      initialState
-        .set('fromWallet', data);
+    const data = fromJS({ id: '1', currency: 'USD', amount: 10 });
 
-    const result = fromJS({
-      fromWallet: data,
+    const mockedState = fromJS({
+      wallet: {
+        fromWallet: data,
+      },
     });
 
-    expect(walletsSelectors.selectFromWallet(walletState)).toEqual(result);
+    expect(selectFromWallet(mockedState)).toEqual(data);
   });
 
+  const selectToWallet = walletsSelectors.selectToWallet();
   it('should select toWallet', () => {
-    const data = { id: '2', currency: 'EUR', amount: 12.45 };
-    const walletState =
-      initialState
-        .set('toWallet', data);
+    const data = fromJS({ id: '2', currency: 'EUR', amount: 12.45 });
 
-    const result = fromJS({
-      toWallet: data,
+    const mockedState = fromJS({
+      wallet: {
+        toWallet: data,
+      },
     });
 
-    expect(walletsSelectors.selectToWallet(walletState)).toEqual(result);
+    expect(selectToWallet(mockedState)).toEqual(data);
   });
 
+  const selectAmount = walletsSelectors.selectAmount();
   it('should select amount', () => {
-    const data = 12.24;
-    const walletState =
-      initialState
-        .set('amount', data);
+    const data = fromJS(12.24);
 
-    const result = fromJS({
-      amount: data,
+    const mockedState = fromJS({
+      wallet: {
+        amount: data,
+      },
     });
-
-    expect(walletsSelectors.selectAmount(walletState)).toEqual(result);
+    expect(selectAmount(mockedState)).toEqual(data);
   });
 
+  const selectLoading = walletsSelectors.selectWalletsLoading();
   it('should select loading', () => {
-    const data = true;
-    const walletState =
-      initialState
-        .set('loading', data);
+    const data = fromJS(true);
 
-    const result = fromJS({
-      loading: data,
+    const mockedState = fromJS({
+      wallet: {
+        loading: data,
+      },
     });
 
-    expect(walletsSelectors.selectWalletsLoading(walletState)).toEqual(result);
+    expect(selectLoading(mockedState)).toEqual(data);
   });
 
+  const selectError = walletsSelectors.selectWalletsError();
   it('should select error', () => {
-    const data = { code: 'code', message: 'message' };
-    const walletState =
-      initialState
-        .set('error', data);
+    const data = fromJS({ code: 'code', message: 'message' });
 
-    const result = fromJS({
-      error: data,
+    const mockedState = fromJS({
+      wallet: {
+        error: data,
+      },
     });
 
-    expect(walletsSelectors.selectWalletsError(walletState)).toEqual(result);
+    expect(selectError(mockedState)).toEqual(data);
   });
 });

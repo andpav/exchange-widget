@@ -18,8 +18,8 @@ const selectRatesError = () => createSelector(
   (globalState) => globalState.get('error')
 );
 
-const selectCurrentRate = (state) => createSelector(
-  selectRates(state),
+const selectCurrentRate = () => createSelector(
+  selectRates(),
   selectFromWallet(),
   selectToWallet(),
   (rates, fromWallet, toWallet) => {
