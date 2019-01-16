@@ -1,141 +1,24 @@
-.home-page {
+.page {
   color: white;
-
-  h2 {
-    font-size: 1.5em;
-  }
-
-  section {
-    margin: 3em auto;
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    &.content {
-      position: relative;
-      text-align: center;
-      background: #1c6dc6;
-      padding-top: 6px;
-    }
-  }
-
-  form {
-    margin-bottom: 1em;
-
-    input {
-      outline: none;
-      border-bottom: 1px dotted #999;
-    }
-  }
-
-  span.at-prefix {
-    color: black;
-    margin-left: 0.4em;
-  }
-}
-
-.content__menu {
-  border: 1px solid;
-  max-width: 130px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.content__top {
-  min-height: 170px;
-}
-
-.content__top::after {
-  content: '';
-  position: absolute;
-  left: calc(50% - 20px / 2); bottom: calc(50% - 30px - 40px / 2);
-  border: 20px solid transparent;
-  border-top: 20px solid #1c6dc6;
-}
-
-.content__bottom {
-  min-height: 170px;
-  background-color: rgba(0,0,0,0.3);
-
-}
-
-.content__menu-text {
   position: relative;
-}
+  text-align: center;
+  background: #1c6dc6;
+  padding-top: 6px;
 
-.content__menu-text::after {
-  content: '';
-  position: absolute;
-  right: 3px; top: 11px;
-  border: 4px solid transparent;
-  border-top: 4px solid white;
-}
+  &__top {
+    min-height: 170px;
 
-.content__button {
-  position: absolute;
-  font-size: 14px;
-  top: 8px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.slider_down {
-}
-
-.slider__input {
-  width: 150px;
-  text-align: right;
-}
-
-.slider-content {
-  min-height: 130px;
-}
-
-.slider-content__row {
-  display: flex;
-  font-size: 12px;
-  justify-content: space-between;
-  margin-left: 24px;
-  margin-right: 24px;
-}
-
-.slider-content__main-row {
-  margin-top: 50px;
-  font-size: 32px;
-  display: flex;
-  justify-content: space-between;
-  margin-left: 24px;
-  margin-right: 24px;
-}
-
-.toast-progress-bar {
-  display: none;
-}
-
-.amount {
-}
-
-.amount__text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-// i'm sorry
-.slider-dots {
-  li {
-    width: 2px;
-    height: 5px;
-
-    button::before {
-      opacity: 0.4 !important;
-      color: white !important;
+    &::after {
+      content: '';
+      position: absolute;
+      left: calc(50% - 20px / 2); bottom: calc(50% - 30px - 40px / 2);
+      border: 20px solid transparent;
+      border-top: 20px solid #1c6dc6;
     }
   }
 
-  .slick-active {
-    button::before {
-      opacity: 1 !important;
-    }
+  &__bottom {
+    min-height: 170px;
+    background-color: rgba(0,0,0,0.3);
   }
 }

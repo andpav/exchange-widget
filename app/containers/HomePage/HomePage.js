@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import { ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { ToastContainer, toast } from 'react-toastify';
-import roundAmount from 'utils/roundAmount';
+
+import Loader from 'components/Loader';
+import Error from 'components/Error';
+import PageHeader from 'components/PageHeader';
+import Amount from 'components/Amount';
+import Rate from 'components/Rate';
+import Balance from 'components/Balance';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './style.scss';
+import './Slider.scss';
 
 export default class HomePage extends Component {
   componentDidMount() {
@@ -32,29 +39,21 @@ export default class HomePage extends Component {
       return (
         <article>
           <div className="home-page">
-            <section className="content">
-              <div className="loader">loading...</div>
+            <section className="page">
+              <Loader />
             </section>
           </div>
         </article>);
     }
 
     if (walletsError || ratesError) {
-      return (
-        <article>
-          <div className="home-page">
-            <section className="content">
-              <div>error...</div>
-            </section>
-          </div>
-        </article>
-      );
+      return (<Error />);
     }
 
     const settingsSliderUp = {
       dots: true,
       className: 'slider_up',
-      dotsClass: 'slider-dots slick-dots',
+      dotsClass: 'slick-dots slider-dots',
       afterChange: (id) => {
         setFromWallet(wallets.find((wallet) => wallet.id === String(id)));
       },
@@ -64,7 +63,7 @@ export default class HomePage extends Component {
     const settingsSliderDown = {
       dots: true,
       className: 'slider_down',
-      dotsClass: 'slider-dots slick-dots',
+      dotsClass: 'slick-dots slider-dots',
       afterChange: (id) => {
         setToWallet(wallets.find((wallet) => wallet.id === String(id)));
       },
@@ -73,53 +72,67 @@ export default class HomePage extends Component {
 
     return (
       <article>
-        <div className="home-page">
-          <section className="content">
-            <div className="content__menu"><div className="content__menu-text">{`${fromWallet.sign} 1 = ${toWallet.sign} ${currentRate}`}&nbsp;</div></div>
+        <section className="page">
+          <PageHeader
+            fromWalletSign={fromWallet.sign}
+            toWalletSign={toWallet.sign}
+            rate={currentRate}
+          />
 
-            <button
-              className="content__button"
-              onClick={() => toast(
-                'Success exchange!', {
-                  progressClassName: 'toast-progress-bar'
-                })}
-            >Exchange
-            </button>
+          <div className="page__top">
+            <Slider {...settingsSliderUp}>
+              {wallets.map((wallet) => (
+                <div key={wallet.id} className="slider-content">
+                  <div className="slider-content__main-row">
+                    <span>{wallet.currency}</span>
+                    <input
+                      className="slider__input"
+                      type="number"
+                      min="0"
+                      onChange={(event) => setAmount(Math.abs(event.target.value))}
+                      value={amount}
+                    />
+                  </div>
 
-            <div className="content__top">
-              <div className={'slider slider_up'}>
-                <Slider {...settingsSliderUp}>
-                  {wallets.map((wallet) => (
-                    <div key={wallet.id} className="slider-content">
-                      <div className="slider-content__main-row"><span>{wallet.currency}</span> <input className="slider__input" type="number" min="0" onChange={(event) => setAmount(Math.abs(event.target.value))} value={amount} /></div>
-                      <div className="slider-content__row">You have {`${wallet.sign}${wallet.balance}`}</div>
-                    </div>
-                  ))}
-                </Slider>
-              </div>
-            </div>
+                  <Balance
+                    className="slider-content__row"
+                    sign={wallet.sign}
+                    balance={wallet.balance}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
 
-            <div className="content__bottom">
-              <div className={'slider slider_down'}>
-                <Slider {...settingsSliderDown}>
-                  {wallets.map((wallet) => (
-                    <div key={wallet.id} className="slider-content">
-                      <div className="slider-content__main-row">
-                        <span>{wallet.currency}</span>
-                        <div className="amount"><span className="amount__text">+ {roundAmount(amount * currentRate)}</span></div>
-                      </div>
-                      <div className="slider-content__row">
-                        <span>You have {`${wallet.sign}${wallet.balance}`}</span>
-                        <span>{`${toWallet.sign} 1 = ${fromWallet.sign} ${roundAmount(1 / currentRate)}`}</span>
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-              </div>
-            </div>
+          <div className="page__bottom">
+            <Slider {...settingsSliderDown}>
+              {wallets.map((wallet) => (
+                <div key={wallet.id} className="slider-content">
+                  <div className="slider-content__main-row">
+                    <span>{wallet.currency}</span>
+                    <Amount
+                      amount={amount}
+                      rate={currentRate}
+                    />
+                  </div>
 
-          </section>
-        </div>
+                  <div className="slider-content__row">
+                    <Balance
+                      sign={wallet.sign}
+                      balance={wallet.balance}
+                    />
+
+                    <Rate
+                      firstSign={toWallet.sign}
+                      secondSign={fromWallet.sign}
+                      rate={1 / currentRate}
+                    />
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </section>
 
         <ToastContainer />
       </article>

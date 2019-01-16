@@ -1,0 +1,47 @@
+.slider {
+  &__input {
+    width: 150px;
+    text-align: right;
+  }
+
+  &-content {
+    min-height: 130px;
+  }
+
+  &-content__row {
+    display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  &-content__main-row {
+    margin-top: 50px;
+    font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  // i'm sorry
+  // https://memeexplorer.com/cache/846.jpg
+  &-dots {
+    li {
+      width: 2px;
+      height: 5px;
+
+      button::before {
+        opacity: 0.4 !important;
+        color: white !important;
+      }
+    }
+
+    .slick-active {
+      button::before {
+        opacity: 1 !important;
+      }
+    }
+  }
+}
