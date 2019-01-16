@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 
 import * as walletsActions from 'actions/walletsActions';
-import { wallets } from 'utils/mocks';
+import { wallets } from 'mocks';
 import { getWallets } from '../walletSaga';
 
 /* eslint-disable redux-saga/yield-effects */

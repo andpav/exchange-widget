@@ -1,6 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { walletsLoaded, walletsLoadingError, setFromWallet, setToWallet, loadWallets } from 'actions/walletsActions';
-import { wallets } from 'utils/mocks';
+import { wallets } from 'mocks';
 
 export function* getWallets() {
   try {

@@ -1,13 +1,21 @@
 import roundAmount from './roundAmount';
 
 export default (ratesData) => {
+  if (!ratesData || !Object.keys(ratesData) || !Object.keys(ratesData).length || (typeof ratesData === 'string') || Array.isArray(ratesData)) {
+    return null;
+  }
+
   const rates = {};
 
-  Object.keys(ratesData).forEach((wallet) => Object.assign(rates, {
-    [`EUR${wallet}`]: roundAmount(ratesData[wallet]),
-    [`${wallet}EUR`]: roundAmount(1 / ratesData[wallet]),
-    [`${wallet}${wallet}`]: 1,
-  }));
+  Object.keys(ratesData).forEach((wallet) => {
+    if (!ratesData[wallet] || typeof ratesData[wallet] !== 'number') return null;
+
+    return Object.assign(rates, {
+      [`EUR${wallet}`]: roundAmount(ratesData[wallet]),
+      [`${wallet}EUR`]: roundAmount(1 / ratesData[wallet]),
+      [`${wallet}${wallet}`]: 1,
+    });
+  });
 
   /*
   * Current api from exchangeratesapi.io supports only rates with EUR (in free version).

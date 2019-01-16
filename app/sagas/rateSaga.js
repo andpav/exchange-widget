@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { ratesLoaded, ratesLoadingError, loadRates } from 'actions/ratesActions';
 import calculateRatesData from 'utils/calculateRates';
-import delay from 'utils/delay';
 
 import request from 'utils/request';
 
@@ -24,7 +23,7 @@ export function* getRates() {
     // };
 
     yield put(ratesLoaded(calculateRatesData(response.rates)));
-    yield delay(10000);
+    yield new Promise((res) => setTimeout(res, 10000));
     yield put(loadRates());
   } catch (err) {
     yield put(ratesLoadingError(err));
