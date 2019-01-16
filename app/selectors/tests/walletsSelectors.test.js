@@ -1,5 +1,4 @@
 import { fromJS } from 'immutable';
-import { initialState } from '../../reducers/walletReducer';
 import * as walletsSelectors from '../walletsSelectors';
 
 describe('selectWallet', () => {

@@ -57,7 +57,7 @@ describe('selectRate', () => {
   });
 
   // TODO: fix test
-  const selectCurrentRate = ratesSelectors.selectCurrentRate();
+  // const selectCurrentRate = ratesSelectors.selectCurrentRate();
   it('should select current rate', () => {
     // const rates = fromJS([{ EURUSD: 1.12, USDEUR: 0.9 }]);
     // const fromWallet = fromJS({ id: '1', currency: 'USD', amount: 10 });
