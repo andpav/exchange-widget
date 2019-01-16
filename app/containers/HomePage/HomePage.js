@@ -91,7 +91,7 @@ export default class HomePage extends Component {
                 <Slider {...settingsSliderUp}>
                   {wallets.map((wallet) => (
                     <div key={wallet.id} className="slider-content">
-                      <div className="slider-content__main-row"><span>{wallet.currency}</span> <input className="slider__input" type="number" min="0" maxLength="10" onChange={(event) => setAmount(event.target.value)} value={amount} /></div>
+                      <div className="slider-content__main-row"><span>{wallet.currency}</span> <input className="slider__input" type="number" min="0" onChange={(event) => setAmount(Math.abs(event.target.value))} value={amount} /></div>
                       <div className="slider-content__row">You have {`${wallet.sign}${wallet.balance}`}</div>
                     </div>
                   ))}
@@ -104,7 +104,10 @@ export default class HomePage extends Component {
                 <Slider {...settingsSliderDown}>
                   {wallets.map((wallet) => (
                     <div key={wallet.id} className="slider-content">
-                      <div className="slider-content__main-row"><span>{wallet.currency}</span>  + {roundAmount(amount * currentRate)}</div>
+                      <div className="slider-content__main-row">
+                        <span>{wallet.currency}</span>
+                        <div className="amount"><span className="amount__text">+ {roundAmount(amount * currentRate)}</span></div>
+                      </div>
                       <div className="slider-content__row">
                         <span>You have {`${wallet.sign}${wallet.balance}`}</span>
                         <span>{`${toWallet.sign} 1 = ${fromWallet.sign} ${roundAmount(1 / currentRate)}`}</span>

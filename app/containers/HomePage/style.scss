@@ -113,6 +113,14 @@
   display: none;
 }
 
+.amount {
+}
+
+.amount__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // i'm sorry
 .slider-dots {
   li {
