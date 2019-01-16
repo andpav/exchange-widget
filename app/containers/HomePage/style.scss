@@ -15,9 +15,7 @@
     &.content {
       position: relative;
       text-align: center;
-      background: linear-gradient(180deg, #1c6dc6, #5EA1E8);
-      max-width: 350px;
-      min-height: 400px;
+      background: #1c6dc6;
       padding-top: 6px;
     }
   }
@@ -42,29 +40,25 @@
   max-width: 130px;
   margin-left: auto;
   margin-right: auto;
-  background: #1A6AC1;
 }
 
 .content__top {
   min-height: 170px;
 }
 
-//.content__top::after {
-//  content: '';
-//  position: center; /* Абсолютное позиционирование */
-//  left: 20px; bottom: 0px; /* Положение треугольника */
-//  border: 20px solid transparent; /* Прозрачные границы */
-//  border-top: 20px solid; /* Добавляем треугольник */
-//}
-
-.content__bottom {
-  min-height: 210px;
+.content__top::after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 20px / 2); bottom: calc(50% - 30px - 40px / 2);
+  border: 20px solid transparent;
+  border-top: 20px solid #1c6dc6;
 }
 
-//.content__bottom::before {
-//  background-color: black;
-//  opacity: 0.25;
-//}
+.content__bottom {
+  min-height: 170px;
+  background-color: rgba(0,0,0,0.3);
+
+}
 
 .content__menu-text {
   position: relative;
@@ -83,6 +77,7 @@
   font-size: 14px;
   top: 8px;
   right: 10px;
+  cursor: pointer;
 }
 
 .slider_down {
@@ -118,20 +113,21 @@
   display: none;
 }
 
+// i'm sorry
 .slider-dots {
-  bottom: -25px;
-  width: 100%;
-  margin: 0;
-  list-style: none;
-  text-align: center;
-
   li {
-    position: relative;
-    display: inline-block;
     width: 2px;
     height: 5px;
-    padding: 0;
-    cursor: pointer;
-    //background-color: white;
+
+    button::before {
+      opacity: 0.4 !important;
+      color: white !important;
+    }
+  }
+
+  .slick-active {
+    button::before {
+      opacity: 1 !important;
+    }
   }
 }
