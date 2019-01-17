@@ -93,7 +93,6 @@ export default class HomePage extends Component {
                       value={amount}
                     />
                   </div>
-
                   <Balance
                     className="slider-content__row"
                     sign={wallet.sign}

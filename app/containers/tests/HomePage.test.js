@@ -65,6 +65,8 @@ describe('<HomePage />', () => {
       </Provider>
     );
 
+    console.log(enzymeWrapper.find('.page-header__menu').text(), ' !!!!!')
+
     const menu = enzymeWrapper.find('.page-header__menu');
     // const input = enzymeWrapper.find('.slider__input');
     // input.value = 10;
