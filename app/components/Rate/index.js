@@ -1,22 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import roundAmount from 'utils/roundAmount';
 import PrepareRate from './PrepareRate';
 
 import './style.scss';
 
-const Rate = (props) => (
+type RateProps = {
+  className: string,
+  firstSign: string,
+  secondSign: string,
+  rate: number,
+};
+
+const Rate = (props: RateProps) => (
   <div className={`rate ${props.className}`}>
     <span>{`${props.firstSign} 1 = ${props.secondSign} `}</span>
     <PrepareRate amount={(roundAmount(props.rate))} />
   </div>
 );
-
-Rate.propTypes = {
-  className: PropTypes.string,
-  firstSign: PropTypes.string,
-  secondSign: PropTypes.string,
-  rate: PropTypes.number,
-};
 
 export default Rate;

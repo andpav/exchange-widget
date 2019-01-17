@@ -7,7 +7,8 @@
       }
     ],
     "react",
-    "stage-0"
+    "stage-0",
+    "flow"
   ],
   "env": {
     "production": {

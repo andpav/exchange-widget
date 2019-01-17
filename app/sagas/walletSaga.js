@@ -1,6 +1,8 @@
+// @flow
 import { put, takeLatest } from 'redux-saga/effects';
 import { walletsLoaded, walletsLoadingError, setFromWallet, setToWallet, loadWallets } from 'actions/walletsActions';
 import { wallets } from 'mocks';
+import { walletType } from 'types';
 
 export function* getWallets() {
   try {
@@ -12,8 +14,8 @@ export function* getWallets() {
     const fromWalletCurrency = yield localStorage.getItem('from');
     const toWalletCurrency = yield localStorage.getItem('to');
 
-    const fromWallet = yield fromWalletCurrency ? wallets.find((wallet) => wallet.currency === fromWalletCurrency) : null;
-    const toWallet = yield toWalletCurrency ? wallets.find((wallet) => wallet.currency === toWalletCurrency) : null;
+    const fromWallet = yield fromWalletCurrency ? wallets.find((wallet: walletType) => wallet.currency === fromWalletCurrency) : null;
+    const toWallet = yield toWalletCurrency ? wallets.find((wallet: walletType) => wallet.currency === toWalletCurrency) : null;
 
     yield put(setFromWallet(fromWallet || wallets[0]));
     yield put(setToWallet(toWallet || wallets[1]));

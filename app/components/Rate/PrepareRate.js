@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const PrepareRate = (props) => {
+type PrepareRateProps = {
+  className: string,
+  amount: string | number,
+};
+
+const PrepareRate = (props: PrepareRateProps) => {
   const amountArray = String(props.amount).split('.');
 
   if (amountArray.length === 1) {
@@ -19,14 +23,6 @@ const PrepareRate = (props) => {
       <span>{amountArray[0]}</span>.<span>{amountArray[1].slice(0, 2)}</span><span className="rate_font-size_12">{amountArray[1].slice(2)}</span>
     </span>
   );
-};
-
-PrepareRate.propTypes = {
-  amount: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  className: PropTypes.string,
 };
 
 export default PrepareRate;

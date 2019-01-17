@@ -1,13 +1,15 @@
+// @flow
+import { walletType } from 'types';
 import roundAmount from './roundAmount';
 
-export default (ratesData) => {
+export default (ratesData: any) => {
   if (!ratesData || !Object.keys(ratesData) || !Object.keys(ratesData).length || (typeof ratesData === 'string') || Array.isArray(ratesData)) {
     return null;
   }
 
   const rates = {};
 
-  Object.keys(ratesData).forEach((wallet) => {
+  Object.keys(ratesData).forEach((wallet: walletType) => {
     if (!ratesData[wallet] || typeof ratesData[wallet] !== 'number') return null;
 
     return Object.assign(rates, {

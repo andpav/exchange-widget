@@ -1,6 +1,6 @@
+// @flow
 import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
-import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
 import Loader from 'components/Loader';
@@ -10,11 +10,29 @@ import Amount from 'components/Amount';
 import Rate from 'components/Rate';
 import Balance from 'components/Balance';
 
+import { walletType, errorType } from 'types';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './style.scss';
 import './Slider.scss';
 
-export default class HomePage extends Component {
+type HomePageProps = {
+  fromWallet: walletType,
+  toWallet: walletType,
+  wallets: Array<walletType>,
+  amount: string | number,
+  loading: boolean,
+  currentRate: number,
+  walletsError: errorType,
+  ratesError: errorType,
+  loadRates: () => void,
+  loadWallets: () => void,
+  setAmount: (amount: string | number) => void,
+  setFromWallet: (wallet: walletType) => void,
+  setToWallet: (wallet: walletType) => void,
+};
+
+export default class HomePage extends Component<HomePageProps, {}> {
   componentDidMount() {
     this.props.loadRates();
     this.props.loadWallets();
@@ -144,25 +162,3 @@ export default class HomePage extends Component {
     );
   }
 }
-
-HomePage.propTypes = {
-  fromWallet: PropTypes.object,
-  toWallet: PropTypes.object,
-  wallets: PropTypes.array,
-  amount: PropTypes.string,
-  loading: PropTypes.bool,
-  currentRate: PropTypes.number,
-  walletsError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-  ]),
-  ratesError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-  ]),
-  loadRates: PropTypes.func,
-  loadWallets: PropTypes.func,
-  setAmount: PropTypes.func,
-  setFromWallet: PropTypes.func,
-  setToWallet: PropTypes.func,
-};

@@ -1,7 +1,9 @@
-export default (amount) => {
+// @flow
+
+export default (amount: Number) => {
   if (typeof amount !== 'number') {
     return null;
   }
 
-  return Math.round(Number(amount) * 10000) / 10000;
+  return Math.round(amount * 10000) / 10000;
 };
