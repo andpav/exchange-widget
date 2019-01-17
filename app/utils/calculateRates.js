@@ -1,4 +1,5 @@
 // @flow
+
 import { walletType } from 'types';
 import roundAmount from './roundAmount';
 

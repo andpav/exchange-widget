@@ -1,4 +1,5 @@
 // @flow
+
 import { put, takeLatest } from 'redux-saga/effects';
 import { walletsLoaded, walletsLoadingError, setFromWallet, setToWallet, loadWallets } from 'actions/walletsActions';
 import { wallets } from 'mocks';

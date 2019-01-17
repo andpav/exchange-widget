@@ -1,5 +1,8 @@
-import React from 'react';
+// @flow
 
-const Loader = () => (<div className="loader">loading...</div>);
+import React, { React$Element } from 'react';
+
+
+const Loader = (): React$Element<*> => (<div className="loader">loading...</div>);
 
 export default Loader;

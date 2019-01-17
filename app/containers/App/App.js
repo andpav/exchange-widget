@@ -1,10 +1,12 @@
-import React from 'react';
+// @flow
+
+import React, { React$Element } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage';
 import './style.scss';
 
-const App = () => (
+const App = (): React$Element<*> => (
   <div className="app-wrapper">
     <Switch>
       <Route exact path="/" component={HomePage} />

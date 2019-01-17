@@ -1,5 +1,6 @@
 // @flow
-import React, { Component } from 'react';
+
+import React, { Component, React$Element } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Slider from 'react-slick';
 
@@ -38,7 +39,7 @@ export default class HomePage extends Component<HomePageProps, {}> {
     this.props.loadWallets();
   }
 
-  render() {
+  render(): React$Element<*> {
     const {
       loading,
       wallets,

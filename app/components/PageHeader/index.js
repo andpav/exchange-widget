@@ -1,4 +1,6 @@
-import React from 'react';
+// @flow
+
+import React, { React$Element } from 'react';
 import { toast } from 'react-toastify';
 import Rate from 'components/Rate';
 
@@ -11,7 +13,7 @@ type PageHeaderProps = {
   rate: number,
 };
 
-const PageHeader = (props: PageHeaderProps) => (
+const PageHeader = (props: PageHeaderProps): React$Element<*> => (
   <div className="page-header">
     <div className="page-header__menu">
       <Rate
