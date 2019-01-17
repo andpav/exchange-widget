@@ -9,7 +9,7 @@ const RateProps = {
   className: 'rateClass',
   firstSign: 'a',
   secondSign: 'b',
-  rate: 0.9,
+  rate: 0.9999,
 };
 
 const enzymeWrapper = mount(<Rate {...RateProps} />);
@@ -18,6 +18,12 @@ describe('Rate unit tests', () => {
   it('Rate render rate', () => {
     const rateText = enzymeWrapper.find('.rate');
 
-    expect(rateText.text()).toEqual('a 1 = b 0.9');
+    expect(rateText.text()).toEqual('a 1 = b 0.9999');
+  });
+
+  it('Rates fraction has small font part', () => {
+    const rateText = enzymeWrapper.find('.rate_font-size_12');
+
+    expect(rateText.text()).toEqual('99');
   });
 });

@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import roundAmount from 'utils/roundAmount';
+import PrepareRate from './PrepareRate';
 
-const Rate = (props) => (<span className={`rate ${props.className}`}>{`${props.firstSign} 1 = ${props.secondSign} ${roundAmount(props.rate)}`}</span>);
+import './style.scss';
+
+const Rate = (props) => (
+  <div className={`rate ${props.className}`}>
+    <span>{`${props.firstSign} 1 = ${props.secondSign} `}</span>
+    <PrepareRate amount={(roundAmount(props.rate))} />
+  </div>
+);
 
 Rate.propTypes = {
   className: PropTypes.string,

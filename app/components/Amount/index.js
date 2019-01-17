@@ -10,7 +10,10 @@ const Amount = (props) => (
 
 Amount.propTypes = {
   className: PropTypes.string,
-  amount: PropTypes.number,
+  amount: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   rate: PropTypes.number,
 };
 
