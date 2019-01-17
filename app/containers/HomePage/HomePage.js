@@ -50,14 +50,20 @@ export default class HomePage extends Component {
       return (<Error />);
     }
 
+    /*
+    * fix of strange behavior of slider component
+    * if we will start use slider from sliding (not use dots) - we will
+    * scroll through a lot of wallets and get so big id.
+    * we fixed it with (id % wallets.length)
+    * */
     const settingsSliderUp = {
       dots: true,
       className: 'slider_up',
       dotsClass: 'slick-dots slider-dots',
       afterChange: (id) => {
-        setFromWallet(wallets.find((wallet) => wallet.id === String(id)));
+        setFromWallet(wallets.find((wallet) => wallet.id === String(id % wallets.length)));
       },
-      initialSlide: fromWallet.id,
+      initialSlide: fromWallet.id % wallets.length,
     };
 
     const settingsSliderDown = {
@@ -65,9 +71,9 @@ export default class HomePage extends Component {
       className: 'slider_down',
       dotsClass: 'slick-dots slider-dots',
       afterChange: (id) => {
-        setToWallet(wallets.find((wallet) => wallet.id === String(id)));
+        setToWallet(wallets.find((wallet) => wallet.id === String(id % wallets.length)));
       },
-      initialSlide: toWallet.id,
+      initialSlide: toWallet.id % wallets.length,
     };
 
     return (
