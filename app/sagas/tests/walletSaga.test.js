@@ -15,6 +15,12 @@ describe('wallets sagas', () => {
   it('should dispatch the wallets actions if it requests the data successfully', () => {
     const walletsMock = wallets;
 
+    getWalletsGenerator.next();
+    getWalletsGenerator.next();
+    getWalletsGenerator.next();
+    getWalletsGenerator.next();
+
+
     expect(getWalletsGenerator.next().value).toEqual(put(walletsActions.setFromWallet(walletsMock[0])));
     expect(getWalletsGenerator.next().value).toEqual(put(walletsActions.setToWallet(walletsMock[1])));
     expect(getWalletsGenerator.next().value).toEqual(put(walletsActions.walletsLoaded(walletsMock)));

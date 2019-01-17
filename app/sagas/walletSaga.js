@@ -9,14 +9,38 @@ export function* getWallets() {
       throw new Error('incorrect data!');
     }
 
-    yield put(setFromWallet(wallets[0]));
-    yield put(setToWallet(wallets[1]));
+    const fromWalletCurrency = yield localStorage.getItem('from');
+    const toWalletCurrency = yield localStorage.getItem('to');
+
+    const fromWallet = yield fromWalletCurrency ? wallets.find((wallet) => wallet.currency === fromWalletCurrency) : null;
+    const toWallet = yield toWalletCurrency ? wallets.find((wallet) => wallet.currency === toWalletCurrency) : null;
+
+    yield put(setFromWallet(fromWallet || wallets[0]));
+    yield put(setToWallet(toWallet || wallets[1]));
     yield put(walletsLoaded(wallets));
   } catch (err) {
     yield put(walletsLoadingError(err));
   }
 }
 
+export function* setFromWalletToLocalStorage({ payload }) {
+  try {
+    yield localStorage.setItem('from', payload.currency);
+  } catch (error) {
+    yield console.log(error);
+  }
+}
+
+export function* setToWalletToLocalStorage({ payload }) {
+  try {
+    yield localStorage.setItem('to', payload.currency);
+  } catch (error) {
+    yield console.log(error);
+  }
+}
+
 export default function* walletSagas() {
   yield takeLatest(loadWallets, getWallets);
+  yield takeLatest(setFromWallet, setFromWalletToLocalStorage);
+  yield takeLatest(setToWallet, setToWalletToLocalStorage);
 }
