@@ -24,19 +24,11 @@ export function* getWallets() {
 }
 
 export function* setFromWalletToLocalStorage({ payload }) {
-  try {
-    yield localStorage.setItem('from', payload.currency);
-  } catch (error) {
-    yield console.log(error);
-  }
+  yield localStorage.setItem('from', payload.currency);
 }
 
 export function* setToWalletToLocalStorage({ payload }) {
-  try {
-    yield localStorage.setItem('to', payload.currency);
-  } catch (error) {
-    yield console.log(error);
-  }
+  yield localStorage.setItem('to', payload.currency);
 }
 
 export default function* walletSagas() {

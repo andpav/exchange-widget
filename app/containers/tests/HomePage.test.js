@@ -1,17 +1,12 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
 import nock from 'nock';
 import configureStore from 'configureStore';
-
-import ratesAction from 'actions/ratesActions';
-import walletsActions from 'actions/walletsActions';
-
 import createHistory from 'history/createBrowserHistory';
 
-import HomePage, { mapDispatchToProps } from '../HomePage';
-
+import HomePage from '../HomePage';
 
 const initialState = fromJS({
   rate: {
@@ -41,39 +36,30 @@ const initialState = fromJS({
     error: false,
   },
 });
+
 const history = createHistory();
 const store = configureStore(initialState, history);
 
+
+// TODO: fix test
 describe('<HomePage />', () => {
   it('should render HomePage', () => {
-    // nock('https://api.exchangeratesapi.io')
-    //   .get('/latest')
-    //   .reply(200, { rates: {
-    //     GBP: 1.1392,
-    //     USD: 0.8778,
-    //   }});
-
-    const loadRatesSpy = jest.fn();
-    const loadWalletsSpy = jest.fn();
+    nock('https://api.exchangeratesapi.io')
+      .get('/latest')
+      .reply(200, { rates: {
+        GBP: 1.1392,
+        USD: 0.8778,
+      }});
 
     const enzymeWrapper = mount(
       <Provider store={store}>
-        <HomePage
-          loadRates={loadRatesSpy}
-          loadWallets={loadWalletsSpy}
-        />
+        <HomePage />
       </Provider>
     );
 
-    console.log(enzymeWrapper.find('.page-header__menu').text(), ' !!!!!')
-
+    // eslint-disable-next-line
     const menu = enzymeWrapper.find('.page-header__menu');
-    // const input = enzymeWrapper.find('.slider__input');
-    // input.value = 10;
-
-    // const amount = enzymeWrapper.find('.amount111');
 
     // expect(menu.text()).toEqual('$ 1 = € 0.8778');
-    // expect(amount.text()).toEqual('+ 8.778');
   });
 });

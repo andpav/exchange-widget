@@ -23,7 +23,7 @@ const selectCurrentRate = () => createSelector(
   selectFromWallet(),
   selectToWallet(),
   (rates, fromWallet, toWallet) => {
-    if (!rates || !Object.keys(rates).length) {
+    if (!rates || !Object.keys(rates).length || !fromWallet || !toWallet) {
       return null;
     }
 
