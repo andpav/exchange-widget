@@ -9,6 +9,7 @@ const PageHeader = (props) => (
   <div className="page-header">
     <div className="page-header__menu">
       <Rate
+        className={props.className}
         firstSign={props.fromWalletSign}
         secondSign={props.toWalletSign}
         rate={props.rate}
@@ -25,6 +26,7 @@ const PageHeader = (props) => (
   </div>);
 
 PageHeader.propTypes = {
+  className: PropTypes.string,
   fromWalletSign: PropTypes.string,
   toWalletSign: PropTypes.string,
   rate: PropTypes.number,

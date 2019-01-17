@@ -6,7 +6,7 @@ import { loadRates } from 'actions/ratesActions';
 import { loadWallets, setAmount, setFromWallet, setToWallet } from 'actions/walletsActions';
 import HomePage from './HomePage';
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   loadRates: () => {
     dispatch(loadRates());
   },

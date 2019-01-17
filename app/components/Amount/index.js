@@ -4,13 +4,14 @@ import roundAmount from 'utils/roundAmount';
 
 const Amount = (props) => (
   <div className="amount">
-    <span className="amount__text">+ {roundAmount(props.amount * props.rate)}</span>
+    <span className={`amount__text ${props.className}`}>+ {roundAmount(props.amount * props.rate)}</span>
   </div>
 );
 
 Amount.propTypes = {
-  amount: PropTypes.string,
-  rate: PropTypes.string,
+  className: PropTypes.string,
+  amount: PropTypes.number,
+  rate: PropTypes.number,
 };
 
 export default Amount;
