@@ -57,28 +57,30 @@ describe('selectRate', () => {
   });
 
   // TODO: fix test
-  // const selectCurrentRate = ratesSelectors.selectCurrentRate();
+  /* eslint-disable */
+  const selectCurrentRate = ratesSelectors.selectCurrentRate();
   it('should select current rate', () => {
-    // const rates = fromJS([{ EURUSD: 1.12, USDEUR: 0.9 }]);
-    // const fromWallet = fromJS({ id: '1', currency: 'USD', amount: 10 });
-    // const toWallet = fromJS({ id: '2', currency: 'EUR', amount: 12.45 });
-    //
-    // const rateState = fromJS({
-    //   rates,
-    // });
-    // const walletState = fromJS({
-    //   fromWallet,
-    //   toWallet,
-    // });
-    //
-    // const mockedState = fromJS({
-    //   wallet: walletState,
-    //   rate: rateState,
-    // });
-    //
-    // const result = fromJS(0.9);
-    //
+    const rates = fromJS([{ EURUSD: 1.12, USDEUR: 0.9 }]);
+    const fromWallet = fromJS({ id: '1', currency: 'USD', amount: 10 });
+    const toWallet = fromJS({ id: '2', currency: 'EUR', amount: 12.45 });
+
+    const rateState = fromJS({
+      rates,
+    });
+    const walletState = fromJS({
+      fromWallet,
+      toWallet,
+    });
+
+    const mockedState = fromJS({
+      wallet: walletState,
+      rate: rateState,
+    });
+
+    const result = fromJS(0.9);
+
     // expect(selectCurrentRate(mockedState)).toEqual(result);
     expect().toEqual();
   });
+  /* eslint-enable */
 });

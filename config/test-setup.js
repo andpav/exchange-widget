@@ -6,11 +6,10 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
 Object.defineProperty(window, 'matchMedia', {
+  // eslint-disable-next-line
   value: () => {
     return {
       matches: false,
-      addListener: () => {},
-      removeListener: () => {},
     };
   },
 });
