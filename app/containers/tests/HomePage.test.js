@@ -7,7 +7,7 @@ import configureStore from 'configureStore';
 import createHistory from 'history/createBrowserHistory';
 
 import HomePage from '../HomePage';
-
+/* eslint-disable */
 const initialState = fromJS({
   rate: {
     rates: {
@@ -36,6 +36,7 @@ const initialState = fromJS({
     error: false,
   },
 });
+/* eslint-enable */
 
 const history = createHistory();
 const store = configureStore(initialState, history);
@@ -46,10 +47,12 @@ describe('<HomePage />', () => {
   it('should render HomePage', () => {
     nock('https://api.exchangeratesapi.io')
       .get('/latest')
-      .reply(200, { rates: {
-        GBP: 1.1392,
-        USD: 0.8778,
-      }});
+      .reply(200, {
+        rates: {
+          GBP: 1.1392,
+          USD: 0.8778,
+        }
+      });
 
     const enzymeWrapper = mount(
       <Provider store={store}>
