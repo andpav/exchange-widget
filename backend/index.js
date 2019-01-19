@@ -1,22 +1,22 @@
-const express = require('express')
-const cors = require('cors')
-const rates = require('./rates')
-const wallets = require('./wallets')
+const express = require('express');
+const cors = require('cors');
+const rates = require('./rates');
 const path = require('path');
 const https = require('https');
 
-const app = express()
-const port = 8082
+const app = express();
+const port = 8082;
 
-app.use(cors())
+let wallets = require('./wallets');
+
+app.use(cors());
 
 const parser = function (req, res, next) {
-  var body = [];
-  req.on('data', function (chunk) {
+  let body = [];
+  req.on('data', (chunk) => {
     body.push(chunk);
-  }).on('end', function () {
+  }).on('end', () => {
     body = Buffer.concat(body).toString();
-    console.log(body, ' body!!!')
     body = JSON.parse(body);
     req.body = body;
     next();
@@ -34,8 +34,32 @@ app.get('/api/wallets', (request, response) => {
 });
 
 app.post('/api/wallets', parser, (request, response) => {
+  const { amount, fromWalletId, toWalletId } = request.body;
+  const fromWallet = wallets.find((wallet) => wallet.id === fromWalletId);
+  const toWallet = wallets.find((wallet) => wallet.id === toWalletId);
+  const currentRate = rates[`${fromWallet.currency}${toWallet.currency}`];
 
-  response.send(200);
+  if (fromWallet.id === toWallet.id) { return; }
+
+  wallets = wallets.map((wallet) => {
+    if (wallet.id === fromWalletId) return {
+      id: wallet.id,
+      currency: wallet.currency,
+      sign: wallet.sign,
+      balance: Math.round((wallet.balance - amount) * 10000) / 10000,
+    };
+
+    if (wallet.id === toWalletId) return {
+      id: wallet.id,
+      currency: wallet.currency,
+      sign: wallet.sign,
+      balance: Math.round((wallet.balance + (amount * currentRate)) * 10000) / 10000,
+    };
+
+    return wallet;
+  });
+
+  response.sendStatus(204);
 });
 
 app.get('/api/rates', (request, response) => {

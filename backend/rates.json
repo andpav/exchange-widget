@@ -1,4 +1,11 @@
 {
-  "GBP": 1.1,
-  "USD": 0.9
+  "EURGBP": 0.88,
+  "GBPEUR": 1.14,
+  "GBPGBP": 1,
+  "EURUSD": 1.14,
+  "USDEUR": 0.877,
+  "USDUSD": 1,
+  "GBPUSD": 1.29,
+  "USDGBP": 0.7825,
+  "EUREUR": 1
 }

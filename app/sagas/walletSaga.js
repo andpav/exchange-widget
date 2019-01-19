@@ -6,6 +6,7 @@ import { selectFromWallet, selectToWallet, selectAmount } from 'selectors/wallet
 import { walletType } from 'types';
 import { walletsApiUrl } from 'constants/urls';
 import request from 'utils/request';
+import { toast } from 'react-toastify';
 
 export function* getWalletsSaga() {
   try {
@@ -28,10 +29,39 @@ export function* getWalletsSaga() {
 export function* exchangeSaga() {
   try {
     const amount = yield select(selectAmount());
-    const fromWalletId = yield select(selectFromWallet());
-    const toWalletId = yield select(selectToWallet());
+    const fromWallet = yield select(selectFromWallet());
+    const toWallet = yield select(selectToWallet());
 
-    yield call(request, walletsApiUrl, 'POST', JSON.stringify({ amount, fromWalletId, toWalletId }));
+    if (!amount) {
+      toast('You cannot exchange zero', {
+        progressClassName: 'page-header__progress-bar'
+      });
+
+      return;
+    }
+
+    if (fromWallet.id === toWallet.id) {
+      toast('You cannot exchange to the same wallet', {
+        progressClassName: 'page-header__progress-bar'
+      });
+
+      return;
+    }
+
+    if (amount > fromWallet.balance) {
+      toast('Not enough money to exchange', {
+        progressClassName: 'page-header__progress-bar'
+      });
+
+      return;
+    }
+
+    yield call(request, walletsApiUrl, 'POST', JSON.stringify({ amount, fromWalletId: fromWallet.id, toWalletId: toWallet.id }));
+
+    toast('Success exchange!', {
+      progressClassName: 'page-header__progress-bar'
+    });
+
     yield put(loadWallets());
   } catch (err) {
     yield put(exchangeError(err));

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { React$Element } from 'react';
-import { toast } from 'react-toastify';
 import Rate from 'components/Rate';
 
 import './style.scss';
@@ -13,11 +12,6 @@ type PageHeaderProps = {
   rate: number,
   exchange: () => void,
 };
-
-// () => toast(
-//   'Success exchange!', {
-//     progressClassName: 'page-header__progress-bar'
-//   })
 
 const PageHeader = (props: PageHeaderProps): React$Element<*> => (
   <div className="page-header">
