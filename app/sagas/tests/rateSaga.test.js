@@ -1,6 +1,4 @@
 import { put } from 'redux-saga/effects';
-import calculateRatesData from 'utils/calculateRates';
-
 import * as ratesActions from 'actions/ratesActions';
 import { getRates } from '../rateSaga';
 
@@ -12,17 +10,10 @@ describe('rates sagas', () => {
     getRatesGenerator = getRates();
   });
 
-  const response = {
-    rates: {
-      USD: 1.1392,
-      GBP: 0.8778,
-    }
-  };
-
   it('should dispatch the rates actions if it requests the data successfully', () => {
-    getRatesGenerator.next(response);
+    getRatesGenerator.next();
 
-    expect(getRatesGenerator.next(response).value).toEqual(put(ratesActions.ratesLoaded(calculateRatesData(response.rates))));
+    expect(getRatesGenerator.next().value).toEqual(put(ratesActions.ratesLoaded()));
     getRatesGenerator.next();
     getRatesGenerator.next();
   });
