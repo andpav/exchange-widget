@@ -31,6 +31,7 @@ type HomePageProps = {
   setAmount: (amount: string | number) => void,
   setFromWallet: (wallet: walletType) => void,
   setToWallet: (wallet: walletType) => void,
+  exchange: () => void,
 };
 
 export default class HomePage extends Component<HomePageProps, {}> {
@@ -51,7 +52,8 @@ export default class HomePage extends Component<HomePageProps, {}> {
       amount,
       setAmount,
       setFromWallet,
-      setToWallet
+      setToWallet,
+      exchange,
     } = this.props;
 
     if (loading) {
@@ -80,9 +82,9 @@ export default class HomePage extends Component<HomePageProps, {}> {
       className: 'slider_up',
       dotsClass: 'slick-dots slider-dots',
       afterChange: (id) => {
-        setFromWallet(wallets.find((wallet) => wallet.id === String(id % wallets.length)));
+        setFromWallet(wallets.find((wallet) => wallet.id === (id % wallets.length)));
       },
-      initialSlide: fromWallet.id % wallets.length,
+      initialSlide: fromWallet.id,
     };
 
     const settingsSliderDown = {
@@ -90,9 +92,9 @@ export default class HomePage extends Component<HomePageProps, {}> {
       className: 'slider_down',
       dotsClass: 'slick-dots slider-dots',
       afterChange: (id) => {
-        setToWallet(wallets.find((wallet) => wallet.id === String(id % wallets.length)));
+        setToWallet(wallets.find((wallet) => wallet.id === (id % wallets.length)));
       },
-      initialSlide: toWallet.id % wallets.length,
+      initialSlide: toWallet.id,
     };
 
     return (
@@ -102,6 +104,7 @@ export default class HomePage extends Component<HomePageProps, {}> {
             fromWalletSign={fromWallet.sign}
             toWalletSign={toWallet.sign}
             rate={currentRate}
+            exchange={exchange}
           />
 
           <div className="page__top">

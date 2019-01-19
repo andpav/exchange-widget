@@ -11,7 +11,13 @@ type PageHeaderProps = {
   fromWalletSign: string,
   toWalletSign: string,
   rate: number,
+  exchange: () => void,
 };
+
+// () => toast(
+//   'Success exchange!', {
+//     progressClassName: 'page-header__progress-bar'
+//   })
 
 const PageHeader = (props: PageHeaderProps): React$Element<*> => (
   <div className="page-header">
@@ -25,10 +31,7 @@ const PageHeader = (props: PageHeaderProps): React$Element<*> => (
     </div>
     <button
       className="page-header__button"
-      onClick={() => toast(
-        'Success exchange!', {
-          progressClassName: 'page-header__progress-bar'
-        })}
+      onClick={props.exchange}
     >Exchange
     </button>
   </div>);

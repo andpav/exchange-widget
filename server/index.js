@@ -7,8 +7,11 @@ const argv = require('./util/argv');
 const port = require('./util//port');
 const setup = require('./middlewares/frontendMiddleware');
 const { resolve } = require('path');
+const proxy = require('http-proxy-middleware');
 
 const app = express();
+
+app.use('/api', proxy({ target: 'http://localhost:8082/', changeOrigin: true }));
 
 // app.use('/api', myApi);
 

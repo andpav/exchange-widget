@@ -17,7 +17,12 @@ function checkStatus(response) {
   throw error;
 }
 
-export default function request(url, options) {
+export default function request(url, method, data) {
+  const headers = new Headers({
+    'content-type': 'json',
+  });
+  const options = method === 'POST' ? { method, headers, body: data } : { method };
+
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);

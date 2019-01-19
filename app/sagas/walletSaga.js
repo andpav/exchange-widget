@@ -1,16 +1,15 @@
 // @flow
 
-import { put, takeLatest } from 'redux-saga/effects';
-import { walletsLoaded, walletsLoadingError, setFromWallet, setToWallet, loadWallets } from 'actions/walletsActions';
-import { wallets } from 'mocks';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { walletsLoaded, walletsLoadingError, exchangeError, setFromWallet, setToWallet, loadWallets, exchange } from 'actions/walletsActions';
+import { selectFromWallet, selectToWallet, selectAmount } from 'selectors/walletsSelectors';
 import { walletType } from 'types';
+import { walletsApiUrl } from 'constants/urls';
+import request from 'utils/request';
 
-export function* getWallets() {
+export function* getWalletsSaga() {
   try {
-    // wallets request place here
-    if (!Array.isArray(wallets) || wallets.length < 2) {
-      throw new Error('incorrect data!');
-    }
+    const wallets = yield call(request, walletsApiUrl, 'GET');
 
     const fromWalletCurrency = yield localStorage.getItem('from');
     const toWalletCurrency = yield localStorage.getItem('to');
@@ -26,16 +25,30 @@ export function* getWallets() {
   }
 }
 
-export function* setFromWalletToLocalStorage({ payload }) {
+export function* exchangeSaga() {
+  try {
+    const amount = yield select(selectAmount());
+    const fromWalletId = yield select(selectFromWallet());
+    const toWalletId = yield select(selectToWallet());
+
+    yield call(request, walletsApiUrl, 'POST', JSON.stringify({ amount, fromWalletId, toWalletId }));
+    yield put(loadWallets());
+  } catch (err) {
+    yield put(exchangeError(err));
+  }
+}
+
+export function* setFromWalletToLocalStorageSaga({ payload }) {
   yield localStorage.setItem('from', payload.currency);
 }
 
-export function* setToWalletToLocalStorage({ payload }) {
+export function* setToWalletToLocalStorageSaga({ payload }) {
   yield localStorage.setItem('to', payload.currency);
 }
 
 export default function* walletSagas() {
-  yield takeLatest(loadWallets, getWallets);
-  yield takeLatest(setFromWallet, setFromWalletToLocalStorage);
-  yield takeLatest(setToWallet, setToWalletToLocalStorage);
+  yield takeLatest(loadWallets, getWalletsSaga);
+  yield takeLatest(exchange, exchangeSaga);
+  yield takeLatest(setFromWallet, setFromWalletToLocalStorageSaga);
+  yield takeLatest(setToWallet, setToWalletToLocalStorageSaga);
 }

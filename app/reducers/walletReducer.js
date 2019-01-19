@@ -9,7 +9,7 @@ export const initialState = fromJS({
   wallets: [],
   fromWallet: { id: 'from', currency: 'cur', amount: 0 },
   toWallet: { id: 'to', currency: 'cur', amount: 0 },
-  amount: '',
+  amount: 0,
 });
 
 export default handleActions({

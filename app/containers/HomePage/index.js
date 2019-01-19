@@ -3,7 +3,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectRatesLoading, selectRatesError, selectCurrentRate } from 'selectors/ratesSelectors';
 import { selectWallets, selectWalletsLoading, selectWalletsError, selectFromWallet, selectToWallet, selectAmount } from 'selectors/walletsSelectors';
 import { loadRates } from 'actions/ratesActions';
-import { loadWallets, setAmount, setFromWallet, setToWallet } from 'actions/walletsActions';
+import { loadWallets, setAmount, setFromWallet, setToWallet, exchange } from 'actions/walletsActions';
 import HomePage from './HomePage';
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -21,6 +21,9 @@ export const mapDispatchToProps = (dispatch) => ({
   },
   setToWallet: (wallet) => {
     dispatch(setToWallet(wallet));
+  },
+  exchange: () => {
+    dispatch(exchange());
   },
 });
 

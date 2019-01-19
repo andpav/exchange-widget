@@ -1,1 +1,2 @@
-export const ratesApiUrl = 'https://api.exchangeratesapi.io/latest';
+export const ratesApiUrl = '/api/rates';
+export const walletsApiUrl = '/api/wallets';
