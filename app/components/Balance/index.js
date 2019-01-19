@@ -18,6 +18,6 @@ const Balance = (props: BalanceProps): React$Element<*> => {
   );
 
   return (<div className={balanceClass}>You have {`${props.sign}${props.balance}`}</div>);
-}
+};
 
 export default Balance;

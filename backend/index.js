@@ -1,3 +1,4 @@
+/* eslint-disable */
 const express = require('express');
 const cors = require('cors');
 const rates = require('./rates');
@@ -80,3 +81,4 @@ app.listen(port, (err) => {
   }
   console.log(`server is listening on ${port}`);
 });
+/* eslint-enable */
