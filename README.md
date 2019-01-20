@@ -10,7 +10,7 @@ yarn install
 yarn build
 ```
 
-## Run Backend Server (is necessary for local testing)
+## Run Server (is necessary for local testing)
 ```bash
 yarn server
 ```
