@@ -64,15 +64,17 @@ app.post('/api/wallets', parser, (request, response) => {
 });
 
 app.get('/api/rates', (request, response) => {
-  // const ratesApiUrl = 'https://api.exchangeratesapi.io/latest';
+  const ratesApiUrl = 'https://api.exchangeratesapi.io/latest';
 
-  // https.get(ratesApiUrl, (res) => {
-  //   res.on('data', (data) => {
-  //     response.send(data.rates);
-  //   });
-  // }).on('error', () => {
+  https.get(ratesApiUrl, (res) => {
+    // res.on('data', (data) => {
+    //   response.send(data.rates);
+    // });
+
     response.send(rates);
-  // });
+  }).on('error', () => {
+    response.send(rates);
+  });
 });
 
 app.listen(port, (err) => {
